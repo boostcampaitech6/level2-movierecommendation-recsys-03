@@ -10,9 +10,11 @@ def convert_into_atomic_files(config):
     titles = pd.read_csv(os.path.join(config['data_path'], 'titles.tsv'), sep='\t')
     writers = pd.read_csv(os.path.join(config['data_path'], 'writers.tsv'), sep='\t')
     years = pd.read_csv(os.path.join(config['data_path'], 'years.tsv'), sep='\t')
+
+    atomic_file_path = os.path.join(config['data_path'], config['dataset'])
     
-    if not os.path.exists('/data/data/train/movie/'):
-        os.makedirs('/data/data/train/movie/')
+    if not os.path.exists(atomic_file_path):
+        os.makedirs(atomic_file_path)
     interactions.rename(columns={'user':'user:token', 'item':'item:token', 'time':'time:float'}, inplace = True)
     interactions.to_csv(os.path.join(config['data_path'], 'movie/movie.inter'), sep='\t', index=False)
     print("Save interaction data ...")
