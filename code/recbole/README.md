@@ -15,7 +15,7 @@ pip install -r requirements.txt
    ```
    python data_preprocessing.py
    ```
-2. Set Config file
+2. Set Config file  
    recbole에서 제공하는 모델 중 하나를 골라서 {model_name}.yaml 파일로 저장합니다.  
    참고 사이트: https://recbole.io/docs/recbole/recbole.model.html
     
