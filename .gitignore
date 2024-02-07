@@ -1,3 +1,6 @@
 output
 wandb
 __pycache__
+saved
+log
+log_tensorboard
