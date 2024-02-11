@@ -15,7 +15,7 @@ def convert_into_atomic_files(config):
     
     if not os.path.exists(atomic_file_path):
         os.makedirs(atomic_file_path)
-    interactions.rename(columns={'user':'user:token', 'item':'item:token', 'time':'time:float'}, inplace = True)
+    interactions.rename(columns={'user':'user:token', 'item':'item:token', 'time':'timestamp:float'}, inplace = True)
     interactions.to_csv(os.path.join(config['data_path'], 'movie/movie.inter'), sep='\t', index=False)
     print("Save interaction data ...")
     
