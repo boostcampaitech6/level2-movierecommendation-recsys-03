@@ -45,9 +45,9 @@ def main(args):
     print(f'--------------- INIT {args.model} ---------------')
     p_dims = [200, 600, n_items]
     if args.model=='Multi-DAE':
-        model = MultiDAE(p_dims).to(args.device)
+        model = MultiDAE(p_dims, args.drop_out).to(args.device)
     elif args.model=='Multi-VAE':
-        model = MultiVAE(p_dims).to(args.device)
+        model = MultiVAE(p_dims, args.drop_out).to(args.device)
 
     ######################## TRAIN
     print(f'--------------- {args.model} TRAINING ---------------')
@@ -108,6 +108,7 @@ if __name__ == "__main__":
     parser.add_argument('--save', type=str, default='./saved',
                         help='path to save the final model')
     parser.add_argument("--wandb_project_name", default="movierec-multi", type=str, help="Setting WandB Project Name")
+    parser.add_argument('--drop_out', type=float, default=0.5, help='multi-dae drop out')
     
     args = parser.parse_args([])
     

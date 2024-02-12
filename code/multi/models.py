@@ -14,7 +14,7 @@ class MultiDAE(nn.Module):
     https://arxiv.org/abs/1802.05814
     """
 
-    def __init__(self, p_dims, q_dims=None, dropout=0.5):
+    def __init__(self, p_dims, dropout, q_dims=None):
         super(MultiDAE, self).__init__()
         self.p_dims = p_dims
         if q_dims:
@@ -62,7 +62,7 @@ class MultiVAE(nn.Module):
     https://arxiv.org/abs/1802.05814
     """
 
-    def __init__(self, p_dims, q_dims=None, dropout=0.5):
+    def __init__(self, p_dims, dropout, q_dims=None):
         super(MultiVAE, self).__init__()
         self.p_dims = p_dims
         if q_dims:
