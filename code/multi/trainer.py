@@ -10,6 +10,8 @@ import wandb
 
 def run(args, model, loader, logger, setting):
     optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.wd)
+    if not os.path.exists(args.save):
+        os.makedirs(args.save)
     model_path = os.path.join(args.save, setting.get_submit_filename(args)[9:-4]+'.pt')
     
 
