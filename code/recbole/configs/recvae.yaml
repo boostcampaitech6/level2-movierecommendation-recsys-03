@@ -1,29 +1,33 @@
-
-model: RecVAE
+#environment config
+seed: 42
+log_wandb: True
+wandb_project: recbole_recvae
+use_gpu: true
 
 data_path: /data/data/train
 dataset: movie
-field_separator: "	"
-seq_separator: " "
+
+#dataset config : General Recommendation
 USER_ID_FIELD: user
 ITEM_ID_FIELD: item
-TIME_FIELD: time
-show_progress: false
-use_gpu: true
 
+field_separator: "	"
+seq_separator: " "
 load_col:
-    inter: [user, item, time]
-    user: [user]
-    item: [item, genre, director, title, writer, year]
+    inter: [user, item]
 
 user_inter_num_interval: "[0,inf)"
 item_inter_num_interval: "[0,inf)"
+train_neg_sample_args: 
+    distribution: popularity
+    candidate_num: 1
 
-epochs: 340
-train_batch_size: 4096
-metrics: ["Recall", "NDCG"]
-topk: [10]
-valid_metric: NDCG@10
+# model config
+model: RecVAE
+
+# Training and evaluation config
+epochs: 90
+train_batch_size: 2048
 
 eval_args:
   group_by: user
@@ -32,9 +36,20 @@ eval_args:
     LS: valid_and_test
   mode: full
 
-train_neg_sample_args: 
-    distribution: popularity
-    candidate_num: 1
+metrics: ["Recall", "NDCG"]
+topk: [10]
+valid_metric: Recall@10
 
-log_wandb: True
-wandb_project: recbole_recvae
+
+
+
+
+
+
+
+
+
+
+
+
+
