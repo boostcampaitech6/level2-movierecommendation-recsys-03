@@ -1,0 +1,7 @@
+output
+wandb
+__pycache__
+saved
+submit
+log
+log_tensorboard

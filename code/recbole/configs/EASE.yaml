@@ -1,0 +1,37 @@
+#environment config
+seed : 42
+log_wandb: True
+wandb_project: ease
+use_gpu: True
+
+data_path: /data/train
+dataset: movie
+
+# dataset config : General Recommendation
+USER_ID_FIELD: user
+ITEM_ID_FIELD: item
+LABEL_FIELD: label
+field_separator: "	"
+seq_separator: " "
+load_col: 
+    inter: [user, item]
+
+# model config
+model: EASE
+embedding_size: 64
+
+# Training and evaluation config
+epochs: 10
+train_batch_size: 2048
+
+eval_args:
+    group_by: user
+    order: RO
+    split:
+        LS: valid_and_test
+    mode: full
+
+metrics: ['Recall', 'NDCG', 'Precision']
+topk: 10
+valid_metric: Recall@10
+metric_decimal_place: 4
