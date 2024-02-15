@@ -60,9 +60,6 @@ def main(args):
 
     ######################## SAVE PREDICT
     print(f'--------------- SAVE {args.model} PREDICT ---------------')
-    # submission = pd.read_csv(args.data_path + 'sample_submission.csv')
-    # submission['rating'] = predicts
-
     result = pd.DataFrame(predicts, columns=['user', 'item'])
 
     result['user'] = result['user'].apply(lambda x : id2profile[x])
@@ -82,34 +79,35 @@ if __name__ == "__main__":
 
     ## 각종 파라미터 세팅
     parser = argparse.ArgumentParser(description='PyTorch Variational Autoencoders for Collaborative Filtering')
+    arg = parser.add_argument
 
-    parser.add_argument('--data', type=str, default='../../../data/train/',
+    arg('--data', type=str, default='../../../data/train/',
                         help='Movielens dataset location')
-    parser.add_argument('--model', type=str, default='Multi-DAE',
+    arg('--model', type=str, default='Multi-DAE',
                         help='model name')
-    parser.add_argument('--lr', type=float, default=1e-4,
+    arg('--lr', type=float, default=1e-4,
                         help='initial learning rate')
-    parser.add_argument('--wd', type=float, default=0.0,
+    arg('--wd', type=float, default=0.0,
                         help='weight decay coefficient')
-    parser.add_argument('--batch_size', type=int, default=500,
+    arg('--batch_size', type=int, default=500,
                         help='batch size')
-    parser.add_argument('--epochs', type=int, default=10,
+    arg('--epochs', type=int, default=10,
                         help='upper epoch limit')
-    parser.add_argument('--total_anneal_steps', type=int, default=200000,
+    arg('--total_anneal_steps', type=int, default=200000,
                         help='the total number of gradient updates for annealing')
-    parser.add_argument('--anneal_cap', type=float, default=0.2,
+    arg('--anneal_cap', type=float, default=0.2,
                         help='largest annealing parameter')
-    parser.add_argument('--seed', type=int, default=1111,
+    arg('--seed', type=int, default=1111,
                         help='random seed')
-    parser.add_argument('--device', type=str, default='cuda',
+    arg('--device', type=str, default='cuda',
                         help='use gpu')
-    parser.add_argument('--log_interval', type=int, default=100, metavar='N',
+    arg('--log_interval', type=int, default=100, metavar='N',
                         help='report interval')
-    parser.add_argument('--save', type=str, default='./saved',
+    arg('--save', type=str, default='./saved',
                         help='path to save the final model')
-    parser.add_argument("--wandb_project_name", default="movierec-multi", type=str, help="Setting WandB Project Name")
-    parser.add_argument('--drop_out', type=float, default=0.5, help='multi-dae drop out')
+    arg("--wandb_project_name", default="movierec-multi", type=str, help="Setting WandB Project Name")
+    arg('--drop_out', type=float, default=0.5, help='multi-dae drop out')
     
-    args = parser.parse_args([])
+    args = parser.parse_args()
     
     main(args)
