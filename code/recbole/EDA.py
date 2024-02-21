@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import re
 
-data_path = 'data/train'
+data_path = '../../data/train'
 interactions = pd.read_csv(os.path.join(data_path, 'train_ratings.csv'))
 directors = pd.read_csv(os.path.join(data_path, 'directors.tsv'), sep='\t')
 genres = pd.read_csv(os.path.join(data_path, 'genres.tsv'), sep='\t')
@@ -54,13 +54,13 @@ Users['item_count'] = Users['item'].apply(len)
 merged_interactions = interactions.merge(items, on='item', how='left')
 #popularity 추가
 popularity_filled = merged_interactions.groupby(['user', 'popularity_bin']).size().unstack(fill_value=0)
-new_column_names = {pop_bin: f'pop_{int(pop_bin)}' for pop_bin in popularity_filled.columns}
-popularity_filled = popularity_filled.rename(columns=new_column_names)
+#new_column_names = {pop_bin: f'pop_{int(pop_bin)}' for pop_bin in popularity_filled.columns}
+#popularity_filled = popularity_filled.rename(columns=new_column_names)
 Users = pd.merge(Users, popularity_filled, on='user')
 #year 추가
 year_filled = merged_interactions.groupby(['user', 'year_bin']).size().unstack(fill_value=0)
-new_column_names = {year_bin: f'year_{int(year_bin)}' for year_bin in year_filled.columns}
-year_filled = year_filled.rename(columns=new_column_names)
+#new_column_names = {year_bin: f'year_{int(year_bin)}' for year_bin in year_filled.columns}
+#year_filled = year_filled.rename(columns=new_column_names)
 Users = pd.merge(Users, year_filled, on='user')
 #genre,writer,director 추가
 def process_genres(df, top_n=3, label='genre'):
@@ -157,7 +157,7 @@ Users = pd.read_csv(os.path.join(data_path, 'EDA_users.csv'), sep=',')
 
 output_path = 'code/recbole/output/'
 
-submission_name='slim'
+submission_name='easer'
 sub = pd.read_csv(output_path+'submission_'+submission_name+'.csv')
 sub = pd.merge(sub, items, on='item')
 

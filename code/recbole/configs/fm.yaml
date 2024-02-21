@@ -1,4 +1,5 @@
-model: ItemKNN
+
+model: FM
 
 data_path: /data/data/train
 dataset: movie
@@ -13,15 +14,20 @@ use_gpu: true
 
 load_col:
     inter: [user, item, label]
-    user: [user]
-    item: [item, genre, director, title, writer, year, popularity_bin]
+    user: [user, type]
+    item: [item, genre, popularity_bin]
 
 user_inter_num_interval: "[0,inf)"
 item_inter_num_interval: "[0,inf)"
 
-similarity: cosine  # 유사도 메트릭스로 사용할 유사도 함수
+epochs: 10
+train_batch_size: 2048
+learning_rate: 0.01
+metrics: ["Recall", "NDCG"]
+topk: [10]
+valid_metric: Recall@10
+#embedding_size : 2
 
-topk: 10  # 가장 유사한 아이템을 선택할 개수
 
 eval_args:
   group_by: user
@@ -30,7 +36,10 @@ eval_args:
     LS: valid_and_test
   mode: full
 
+train_neg_sample_args: 
+    distribution: popularity
+    candidate_num: 1
+training_neg_sample_num: 1
+
 log_wandb: True
-wandb_project: recbole_deepfm
-    #user: [user, type]
-    #item: [item, genre, director, title, writer, year, year_bin, popularity_bin]
+wandb_project: recbole_seq

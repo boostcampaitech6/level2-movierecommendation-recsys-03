@@ -1,5 +1,5 @@
 
-model: SASRec
+model: GRU4Rec
 #GRU4Rec, BERT4Rec, SASRec
 data_path: /data/data/train
 dataset: movie
@@ -38,3 +38,5 @@ neg_sampling : Null
 
 log_wandb: True
 wandb_project: recbole_seq
+    #user: [user, type]
+    #item: [item, genre, director, title, writer, year, year_bin, popularity_bin]
