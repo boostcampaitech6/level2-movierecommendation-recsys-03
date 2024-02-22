@@ -17,7 +17,7 @@ RATING_FIELD: similarity
 field_separator: "	"
 seq_separator: " "
 load_col: 
-    inter: [user, item, similarity] #inter file에서 사용할 cols
+    inter: [user, item, similarity]
 
 rating_threshold: null
 
@@ -25,7 +25,7 @@ rating_threshold: null
 model: DiffRec
 
 
-noise_schedule: 'linear' #[‘linear’, ‘linear-var’, ‘cosine’, ‘binomial’]
+noise_schedule: 'linear'
 noise_scale: 0.01
 noise_max: 0.005
 noise_min: 0
@@ -37,7 +37,7 @@ time-aware: False
 epochs: 25
 train_batch_size: 4096
 eval_args:
-    group_by: none  #굳이 user로 할 필요가 있나?
+    group_by: user
     order: RO
     split: #{'RS': [0.8,0.1,0.1]}
         LS: 'valid_and_test'
