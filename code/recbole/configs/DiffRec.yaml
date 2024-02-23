@@ -5,15 +5,12 @@ wandb_project: diffrec
 use_gpu: True
 
 data_path: /data/ephemeral/movie/data/train
-#data_path: /data/train
 dataset: movie
 
 # dataset config : General Recommendation
 USER_ID_FIELD: user
 ITEM_ID_FIELD: item
-#LABEL_FIELD: label
 RATING_FIELD: similarity
-#field_separator: ','
 field_separator: "	"
 seq_separator: " "
 load_col: 
@@ -29,8 +26,6 @@ noise_schedule: 'linear'
 noise_scale: 0.01
 noise_max: 0.005
 noise_min: 0
-time-aware: False
-
 
 
 # Training and evaluation config
@@ -39,7 +34,7 @@ train_batch_size: 4096
 eval_args:
     group_by: user
     order: RO
-    split: #{'RS': [0.8,0.1,0.1]}
+    split:
         LS: 'valid_and_test'
     mode: full
 
