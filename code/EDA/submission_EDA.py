@@ -49,9 +49,22 @@ def main(data_path,output_path,submission_name):
     submission_EDA['model'] = submission_name
     submission_EDA.to_csv(os.path.join(output_path,'submission_'+submission_name+'_EDA.csv'), sep=',', index=False)
 
+def submission_merge():
+    #2개의 submission file을 각 type에 맞게 merge
+    data_path = 'data/train'
+    items = pd.read_csv(os.path.join(data_path, 'EDA_items.csv'), sep=',')
+    Users = pd.read_csv(os.path.join(data_path, 'EDA_users.csv'), sep=',')
+
+    output_path = 'code/recbole/output/'
+    sub1 = pd.read_csv(output_path+'submission_EASER_final.csv') # popular type 반영
+    sub2 = pd.read_csv(output_path+'submission_ensemble_final.csv') # 나머지 type 반영
+
+    popular_users = Users.loc[Users['type']=='popular','user'].unique()
+    sub2.loc[sub2['user'].isin(popular_users), 'item'] = sub1.loc[sub1['user'].isin(popular_users), 'item']
+    sub2.to_csv(os.path.join(output_path, 'submission_final.csv'), sep=',',index = False)
 
 if __name__ == '__main__':
     data_path = '../../data/train'
     output_path = '../recbole/output/'
-    submission_name='ease'
+    submission_name='EASER'
     main(data_path,output_path,submission_name)

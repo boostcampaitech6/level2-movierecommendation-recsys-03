@@ -69,5 +69,3 @@ for user, watched_items in user_item_group.items():
 recommendations_df = pd.DataFrame(recommendations, columns=['user', 'item'])
 print(recommendations_df)
 recommendations_df.to_csv('output/submission_rule_types2.csv',index=False)
-
-directors[directors['item']==3471]
