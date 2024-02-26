@@ -132,5 +132,5 @@
 <br><br>
 
 ## Wrap-Up Report
-[MovieREc Wrap-up Report - Suggestify.pdf](./DKT.Wrap-up.Report.-.Suggestify.pdf)
+[MovieRec Wrap-up Report - Suggestify.pdf](./Movie_Recommendation_Wrap-up_Report-Suggestify.pdf)
 <br>
